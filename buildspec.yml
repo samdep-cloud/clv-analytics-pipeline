@@ -1,3 +1,4 @@
+---
 version: 0.2
 
 env:
@@ -9,14 +10,18 @@ phases:
     commands:
       - echo "Preparing Glue script deployment"
 
-build:
-  commands:
-    - echo "Validating Python syntax"
-    - python -m py_compile src/01_raw.py src/02_silver.py src/03_gold.py
-
-post_build:
-  commands:
-    - echo "Deploying scripts to S3"
-    - aws s3 cp src/01_raw.py s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-rds-ingestion.py
-    - aws s3 cp src/02_silver.py s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-silver.py
-    - aws s3 cp src/03_gold.py s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-gold.py
+  build:
+    commands:
+      - echo "Validating Python syntax"
+      - python -m py_compile src/01_raw.py src/02_silver.py src/03_gold.py
+      - echo "Deploying scripts to S3"
+      - >-
+        aws s3 cp src/01_raw.py
+        s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-rds-ingestion.py
+      - >-
+        aws s3 cp src/02_silver.py
+        s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-silver.py
+      - >-
+        aws s3 cp src/03_gold.py
+        s3://$GLUE_SCRIPT_BUCKET/scripts/clv-analytics-gold.py
+      - echo "Glue script deployment complete"
