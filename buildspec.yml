@@ -3,7 +3,7 @@ version: 0.2
 
 env:
   variables:
-    GLUE_SCRIPT_BUCKET: "aws-glue-assets-184495925961-us-east-1"
+    GLUE_SCRIPT_BUCKET: "aws-glue-assets-<account-id>-us-east-1"
 
 phases:
   install:

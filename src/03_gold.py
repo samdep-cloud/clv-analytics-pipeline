@@ -11,7 +11,7 @@ GOLD_PATH = f"s3://{BUCKET}/gold"
 # Read validated Silver data
 items = spark.read.parquet(f"{SILVER_PATH}/order_items/")
 
-# Only include records with valid transaction timestamps
+# Safeguard to include only records with valid transaction timestamps
 items_valid = items.filter(F.col("is_valid_timestamp") == True)
 
 # Aggregate line items into one row per order

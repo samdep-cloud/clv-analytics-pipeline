@@ -15,3 +15,12 @@ __pycache__/
 # Local data
 data/raw/*
 
+# AWS CDK generated output
+cdk.out/
+
+# Private keys and credentials
+*.pem
+*.key
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
